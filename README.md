@@ -15,7 +15,7 @@ NetSpeak Hub is a cutting-edge VoIP (Voice over Internet Protocol) application d
 
 To get started with NetSpeak Hub, follow these steps:
 
-1. **Clone the Repository**: Clone this repository to your local machine using `git clone https://github.com/your-username/NetSpeak-Hub.git`.
+1. **Clone the Repository**: Clone this repository to your local machine using `https://github.com/Animus-Network/net-com-hub.git`.
 2. **Install Dependencies**: Navigate to the project directory and install dependencies using `npm install`.
 3. **Run the App**: Start the application by running `npm start`.
 4. **Sign Up or Log In**: Create a new account or log in to your existing account to start using NetSpeak Hub.
