@@ -30,4 +30,4 @@ For any questions, issues, or feedback, please [open an issue](https://github.co
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the [MIT License](./LICENSE.md).
