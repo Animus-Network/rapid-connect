@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Welcome to Rapid Connect Hub, your ultimate destination for seamless and crystal-clear internet-based communication. Our innovative VoIP app revolutionizes the way you connect with friends, family, and colleagues worldwide. Say goodbye to boundaries and hello to immersive conversations with Rapid Connect. Join the conversation today! ",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "npm test"
+    "server": "node server/app.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1"
   }
 }
