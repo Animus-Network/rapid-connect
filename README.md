@@ -1,6 +1,6 @@
 # Rapid Connect
 
-Rapid Connect is a cutting-edge peer to peer communication application designed to provide seamless and crystal-clear communication over the internet. Whether you're connecting with friends, family, or colleagues, NetSpeak Hub ensures that distance is no barrier to engaging conversations.
+Rapid Connect is a cutting-edge peer to peer communication application designed to provide seamless and crystal-clear communication over the internet. Whether you're connecting with friends, family, or colleagues, Rapid Connect ensures that distance is no barrier to engaging conversations.
 
 ## Features
 
