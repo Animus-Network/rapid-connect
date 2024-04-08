@@ -1,11 +1,11 @@
-import express, { Express, Router } from 'express';
+import express, { Express } from 'express';
 import pino, { HttpLogger } from 'pino-http';
 import { Config as config } from '../config/config';
 import { loggerConfig } from '../config/logger';
+import { router } from './routes/baseRouter';
 
 const logger: HttpLogger = pino(loggerConfig);
 const app: Express = express();
-const router: Router = express.Router();
 
 app.use(logger);
 app.use('/', router);
