@@ -1,14 +1,14 @@
 # Dependency directories
-node_modules/
+*/node_modules/
 
 # Generated files
-web/dist/
-web/build/
+gui/dist/
+gui/build/
 *.log
 
 # OS generated files
-backend/.DS_Store
-backend/.DS_Store?
+server/.DS_Store
+server/.DS_Store?
 
 # User-specific files
 npm-debug.log
@@ -17,11 +17,11 @@ yarn-error.log*
 .pnpm-debug.log
 *.pnp.js
 
-backend/.env
+server/.env
 
 # IDE and text editor files
 .vscode/
 .idea/
 
 # Ignore package-lock files
-package-lock.json
+*/package-lock.json
