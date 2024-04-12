@@ -1,9 +1,13 @@
+import { BaseHandler } from '../controllers/baseHandler'
 import { pingHandler } from '../controllers/pingHandler'
 import express, { Router } from 'express';
 
 
 class RouterFactory {
     private router: Router;
+    private handlers: BaseHandler[] = [
+        pingHandler
+    ]
 
     constructor() {
         this.router = express.Router();
@@ -11,7 +15,14 @@ class RouterFactory {
     }
 
     private registerRoutes(): void {
-        this.router.route(pingHandler.getPath()).get(pingHandler.get);
+        this.handlers.forEach(handler => {
+            // this.router.route(handler.getPath()).options(handler.options);
+            this.router.route(handler.getPath()).get(handler.get);
+            this.router.route(handler.getPath()).post(handler.post);
+            this.router.route(handler.getPath()).put(handler.put);
+            this.router.route(handler.getPath()).patch(handler.patch);
+            this.router.route(handler.getPath()).delete(handler.delete);
+        });
     }
 
     getRouter(): Router {

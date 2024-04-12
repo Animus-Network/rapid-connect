@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
+import HttpStatusCodes from '../utils/httpStatus';
 
 
-abstract class BaseHandler {
+class BaseHandler {
     protected path!: string;
     
     constructor() {
@@ -14,12 +15,12 @@ abstract class BaseHandler {
         return this.path
     }
 
-    abstract options(req: Request, res: Response): Promise<any>;
-    abstract get(req: Request, res: Response): Promise<any>;
-    abstract post(req: Request, res: Response): Promise<any>;
-    abstract put(req: Request, res: Response): Promise<any>;
-    abstract patch(req: Request, res: Response): Promise<any>;
-    abstract delete(req: Request, res: Response): Promise<any>;
+    options(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
+    get(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
+    post(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
+    put(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
+    patch(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
+    delete(req: Request, res: Response): Promise<any> | void { res.status(HttpStatusCodes.HTTP_405.CODE).send( { 'status': 'failed', 'message': HttpStatusCodes.HTTP_405.MESSAGE } ) };
 }
 
-export { BaseHandler };
+export { BaseHandler, HttpStatusCodes };

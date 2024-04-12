@@ -1,11 +1,11 @@
 import express, { Express } from 'express';
-import pino, { HttpLogger } from 'pino-http';
 import { Config as config } from '../config/config';
-import { loggerConfig } from '../config/logger';
+import logger from '../lib/pino';
 import { routerFactory } from './routes/routerFactory';
+import { SocketService } from './services/socketService';
 
-const logger: HttpLogger = pino(loggerConfig);
 const app: Express = express();
+const socketService: SocketService = new SocketService(app);
 
 app.use(logger);
 app.use('/', routerFactory.getRouter());
