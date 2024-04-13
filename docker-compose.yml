@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  rapid-connect-server:
+    image: rapid-connect-server:1.0.0
+    build: .
+    env_file:
+      - .server.env
+    container_name: rapid-connect-server
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - redis
+    command: npm run server
+    networks:
+      - redis-network
+      - mongo-network
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: redis-service
+    hostname: redis.service
+    ports:
+      - 127.0.0.1:6379:6379
+    volumes:
+      - ./redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - redis-network
+
+  mongodb:
+    image: mongo:6.0-jammy
+    container_name: mongodb
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - ./mongodb_data:/data/db
+    env_file:
+      - .server.env
+    networks:
+      - mongo-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  mongo-network:
+  redis-network:

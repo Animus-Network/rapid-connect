@@ -1,5 +1,5 @@
-import { BaseHandler } from '../controllers/baseHandler'
-import { pingHandler } from '../controllers/pingHandler'
+import { BaseHandler } from '../controllers/base.controller'
+import { pingHandler } from '../controllers/ping.controller'
 import express, { Router } from 'express';
 
 

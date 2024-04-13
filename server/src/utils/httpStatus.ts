@@ -1,4 +1,4 @@
-import { HttpStatus, HttpStatusCode } from '../interfaces/http';
+import { HttpStatus, HttpStatusCode } from '../interfaces/http.interface';
 
 const HttpStatusCodeOK: HttpStatusCode = {
     CODE: 200,
@@ -45,7 +45,7 @@ const HttpStatusCodeInternalServerError: HttpStatusCode = {
     MESSAGE: 'Internal Server Error'
 };
 
-const HttpStatusCodes: HttpStatus = {
+const status: HttpStatus = {
     HTTP_200: HttpStatusCodeOK,
     HTTP_201: HttpStatusCodeCreated,
     HTTP_204: HttpStatusCodeNoContent,
@@ -57,4 +57,4 @@ const HttpStatusCodes: HttpStatus = {
     HTTP_500: HttpStatusCodeInternalServerError
 };
   
-export default HttpStatusCodes;
+export default status;

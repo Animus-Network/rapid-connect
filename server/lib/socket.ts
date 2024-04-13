@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { Server } from 'socket.io';
 import { createServer } from 'node:http';
-import { ServerToClientEvents, ClientToServerEvents, InterServerEvents, SocketData } from '../interfaces/socket';
+import { ServerToClientEvents, ClientToServerEvents, InterServerEvents, SocketData } from '../src/interfaces/socket.interface';
 
 class SocketService {
     private io: Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData >;
@@ -10,6 +10,5 @@ class SocketService {
         this.io = new Server(createServer(app));
     }
 }
-
 
 export { SocketService };
