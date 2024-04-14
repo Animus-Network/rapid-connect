@@ -1,102 +1,77 @@
 import redisClient from "../../lib/redis";
 
-const redisPing = async (): Promise<string> => {
-    // Ensure redisClient is properly initialized before calling ping
-    if (!redisClient) {
-        throw new Error('Redis client is not initialized.');
-    }
+class RedisService {
+    private client: any;
 
-    try {
-        const result = await redisClient.ping();
-        return result;
-    } catch (error: any) {
-        throw new Error(error); // Or handle it based on its type, e.g., error.message
-    }
-};
-
-// Function to set a key-value pair in Redis
-const redisSet = async (key: string, value: string | number, ttl: number | null = null): Promise<void> => {
-    // Ensure redisClient is properly initialized before calling set
-    if (!redisClient) {
-        throw new Error('Redis client is not initialized.');
-    }
-
-    try {
-        let transaction = redisClient.multi().set(key, value);
-        if (ttl) {
-            transaction = transaction.expire(key, ttl);
+    constructor() {
+        this.client = redisClient;
+        if (!this.client) {
+            throw new Error('Redis client is not initialized.');
         }
-        await transaction.exec();
-    } catch (error: any) {
-        throw new Error(error);
-    }
-};
-
-
-// Function to get a value from Redis
-const redisGet = async (key: string): Promise<string | number | null> => {
-    // Ensure redisClient is properly initialized before calling get
-    if (!redisClient) {
-        throw new Error('Redis client is not initialized.');
     }
 
-    let value: string | number | null = null;
-
-    try {
-        value = await redisClient.get(key);
-    } catch (error: any) {
-        throw new Error(error); // Or handle it based on its type, e.g., error.message
-    }
-
-    return value;
-};
-
-
-// Function to set a key-value hash pair in Redis
-const redisHset = async (key: string, value: any, ttl: number | null = null): Promise<void> => {
-    // Ensure redisClient is properly initialized before calling set
-    if (!redisClient) {
-        throw new Error('Redis client is not initialized.');
-    }
-
-    try {
-        let transaction = redisClient.multi().hset(key, value);
-        if (ttl) {
-            transaction = transaction.expire(key, ttl);
+    async ping(): Promise<string> {
+        try {
+            const result = await this.client.ping();
+            return result;
+        } catch (error: any) {
+            throw new Error(error);
         }
-        await transaction.exec();
-    } catch (error: any) {
-        throw new Error(error); // Or handle it based on its type, e.g., error.message
-    }
-};
-
-
-// Function to get a value from Redis
-const redisHgetAll = async (key: string): Promise<{ [key: string]: string | number | null } | null> => {
-    // Ensure redisClient is properly initialized before calling get
-    if (!redisClient) {
-        throw new Error('Redis client is not initialized.');
     }
 
-    let redisObj: { [key: string]: string } | null = null;
-
-    try {
-        redisObj = await redisClient.hgetall(key);
-        if (!Object.keys(redisObj).length) {
-            redisObj = null;
+    async set(key: string, value: string | number, ttl: number | null = null): Promise<void> {
+        try {
+            let transaction = this.client.multi().set(key, value);
+            if (ttl) {
+                transaction = transaction.expire(key, ttl);
+            }
+            await transaction.exec();
+        } catch (error: any) {
+            throw new Error(error);
         }
-    } catch (error: any) {
-        throw new Error(error); // Or handle it based on its type, e.g., error.message
     }
 
-    return redisObj;
-};
+    async get(key: string): Promise<string | number | null> {
+        let value: string | number | null = null;
+        try {
+            value = await this.client.get(key);
+        } catch (error: any) {
+            throw new Error(error);
+        }
+        return value;
+    }
 
+    async hset(key: string, value: any, ttl: number | null = null): Promise<void> {
+        try {
+            let transaction = this.client.multi().hset(key, value);
+            if (ttl) {
+                transaction = transaction.expire(key, ttl);
+            }
+            await transaction.exec();
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
 
-export { 
-    redisPing,
-    redisSet,
-    redisGet,
-    redisHset,
-    redisHgetAll
+    async hgetall(key: string): Promise<{ [key: string]: string | number | null } | null> {
+        let redisObj: { [key: string]: string } | null = {};
+
+        try {
+            redisObj = await this.client.hgetall(key);
+
+            if (!redisObj) {
+                redisObj = {};
+            }
+
+            if (!Object.keys(redisObj).length) {
+                redisObj = null;
+            }
+        } catch (error: any) {
+            throw new Error(error); // Or handle it based on its type, e.g., error.message
+        }
+
+        return redisObj;
+    }
 }
+
+export default new RedisService();

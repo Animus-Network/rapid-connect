@@ -1,6 +1,6 @@
-import pino, { HttpLogger } from 'pino-http';
+import pino, { BaseLogger } from 'pino';
 import { loggerConfig } from '../config/logger';
 
-const logger: HttpLogger = pino(loggerConfig);
+const logger: BaseLogger = pino(loggerConfig);
 
-export default logger;
+export { logger, BaseLogger };

@@ -9,6 +9,4 @@ const redisOptions: RedisOptions = {
     // password: "my-top-secret",
 };
 
-const redisClient = new Redis(redisOptions);
-
-export default redisClient;
+export default new Redis(redisOptions);
