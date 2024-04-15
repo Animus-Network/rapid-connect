@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { Config as config } from '../config/config';
-import { routerFactory } from './routes/base.route';
+import router from './routes/base.route';
 import { httpLogger, baseLogger } from '../lib/pino-http';
 import socket from '../lib/socket';
 import mongodb from './services/mongodb.service';
@@ -9,7 +9,7 @@ const app: Express = express();
 socket.__use__(app);
 
 app.use(httpLogger);
-app.use('/', routerFactory.getRouter());
+app.use('/', router);
 
 // Start the server
 app.listen(config.PORT, config.HOST, () => {
