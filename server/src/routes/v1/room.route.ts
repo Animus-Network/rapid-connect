@@ -3,6 +3,6 @@ import express, { Router } from 'express';
 
 const router: Router = express.Router();
 
-router.route('/create').get(createRoom)
+router.route('/create').post(createRoom)
 
 export default router;

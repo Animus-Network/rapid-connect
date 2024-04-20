@@ -8,6 +8,7 @@ import mongodb from './services/mongodb.service';
 const app: Express = express();
 socket.__use__(app);
 
+app.use(express.json());
 app.use(httpLogger);
 app.use('/', router);
 

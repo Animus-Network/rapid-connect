@@ -36,7 +36,7 @@ services:
     volumes:
       - ./mongodb_data:/data/db
     env_file:
-      - .server.env
+      - .mongo.env
     networks:
       - mongo-network
 
