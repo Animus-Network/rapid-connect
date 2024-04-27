@@ -10,14 +10,21 @@ import status from '../utils/httpStatus';
 async function createRoom(req: Request, res: Response): Promise<void> {
     req.log.debug(`Received request: ${req.body} for creating room`);
 
+    // Check if room object has `needAuth` else default to `false`
+    if (!req.body.needAuth) {
+        req.body.needAuth = false;
+    }
+
+    // Using `ajv` for schema validation
     const validate = validator.compile<CreateRoom>(createRoomSchema);
     const validationResult: any = validate(req.body);
 
     try {
-        if (validationResult instanceof Promise) {
+        if (validationResult instanceof Promise) {  // The result of validation should be a `Promise` "In some cases it is a boolean"
             validationResult.then(async (data: CreateRoom) => {
 
-                const collection = mongoClient.db().collection('rooms');
+
+                const collection = mongoClient.db().collection('rooms');    // Connecting to the `rooms` collection
 
                 try {
                     await collection.insertOne(data);
@@ -42,6 +49,7 @@ async function createRoom(req: Request, res: Response): Promise<void> {
     }
 
 }
+
 
 export {
     createRoom

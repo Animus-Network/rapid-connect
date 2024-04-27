@@ -1,7 +1,8 @@
 interface CreateRoom {
     hostUser: string,
     hostIp: string,
-    hostUniqueId: string
+    hostUniqueId: string,
+    needAuth: boolean
 }
 
 export { 
