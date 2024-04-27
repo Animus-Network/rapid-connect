@@ -1,13 +1,14 @@
-import { Request, Response } from 'express';
+import { CustomExpressRequest, CustomExpressResponse } from '../interfaces/express.interface';
+
+import { validator, Ajv } from '../../lib/validator';
 
 import { CreateRoom } from '../interfaces/room.interface';
 import { createRoomSchema } from '../schema/room.schema';
 import mongoClient from '../services/mongodb.service';
-import { validator, Ajv } from '../../lib/validator';
 import status from '../utils/httpStatus';
 
 
-async function createRoom(req: Request, res: Response): Promise<void> {
+async function createRoom(req: CustomExpressRequest, res: CustomExpressResponse): Promise<void> {
     req.log.debug(`Received request: ${req.body} for creating room`);
 
     // Check if room object has `needAuth` else default to `false`
