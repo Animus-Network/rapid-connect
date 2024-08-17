@@ -8,7 +8,8 @@ const createRoomSchema: JSONSchemaType<CreateRoom> = {
         hostUser: { type: 'string' },
         hostIp: { type: 'string' },
         hostUniqueId: { type: 'string' },
-        needAuth: { type: 'boolean', default: false }
+        needAuth: { type: 'boolean', default: false },
+        createdAt: { type: 'number', default: 0 }
     },
     required: [ 'hostUser', 'hostIp', 'hostUniqueId' ]
 };

@@ -25,3 +25,6 @@ server/.env
 
 # Ignore package-lock files
 */package-lock.json
+
+# Ignore database files
+*_data
